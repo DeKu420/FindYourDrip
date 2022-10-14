@@ -15,7 +15,9 @@ import Login from "./pages/login/Login"
 import UserAnalytics from "./components/userAnalytics/UserAnalytics";
 import Sales from "./components/sales/Sales"
 
+
 function App() {
+
   const admin = () => {
     if (
       JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user)
