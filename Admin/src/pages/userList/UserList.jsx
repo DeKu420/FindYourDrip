@@ -5,50 +5,39 @@ import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { getUsers } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { userRequest } from "../../requestMethods";
-import { Container } from "@material-ui/core";
 
-export default function WidgetSm() {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const res = await userRequest.get("users");
-        setUsers(res.data);
-      } catch  {} 
-    };
-    getUsers();
-  },[]);
+
+export default function UsertList() {
+
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users.users);
+  useEffect(()=>{
+    getUsers(dispatch);
+  },[dispatch])
+
   // const handleDelete = (id) => {
-  //   setUsers(users.filter((item) => item.id !== id));
+  //   deleteProduct(id, dispatch);
   // };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 220 },
     {
-      field: "user",
+      field: "username",
       headerName: "User",
       width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
-            {params.row.username}
-          </div>
-        );
-      },
     },
-    { field: "email", headerName: "Email", width: 200 },
+    
+    
     {
-      field: "status",
-      headerName: "Status",
-      width: 120,
+      field: "email",
+      headerName: "Email",
+      width: 200,
     },
+
     {
-      field: "transaction",
-      headerName: "Transaction Volume",
-      width: 160,
+      field : "Member Since" ,
+      headerName : "Created Date",
+      width : 200
     },
     {
       field: "action",
@@ -62,7 +51,7 @@ export default function WidgetSm() {
             </Link>
             <DeleteOutline
               className="userListDelete"
-              //onClick={() => handleDelete(params.row.id)}
+              //onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
@@ -71,17 +60,15 @@ export default function WidgetSm() {
   ];
 
   return (
-    <Container  sx={{height: 350}}>
+    <div className="userList">
       <DataGrid
         rows={users}
         disableSelectionOnClick
         columns={columns}
         getRowId={(row)=>row._id}
-        pageSize={100}
+        pageSize={8}
         checkboxSelection
-        autoHeight
-        columnVisibilityModel
       />
-    </Container>
+    </div>
   );
 }

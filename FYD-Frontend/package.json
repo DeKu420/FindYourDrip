@@ -47,5 +47,5 @@
   },
   "main": "index.js",
   "license": "MIT",
-  "proxy": "http://192.168.1.2:9000"
+  "proxy": "http://localhost:5000/"
 }

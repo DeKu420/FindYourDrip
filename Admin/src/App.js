@@ -14,7 +14,7 @@ import Transaction from "./pages/transaction/transaction";
 import Login from "./pages/login/Login"
 import UserAnalytics from "./components/userAnalytics/UserAnalytics";
 import Sales from "./components/sales/Sales"
-
+import { useSelector } from "react-redux";
 
 function App() {
 
@@ -27,6 +27,15 @@ function App() {
         .currentUser.isAdmin;
     } else { return '' }
   };
+
+  // const admin = useSelector((state) => state.user?.currentUser?.isAdmin)
+  // console.log(admin)
+
+  // const admin = useSelector((state) => state.user.currentUser.isAdmin);
+
+  //const admin = useSelector((state) => state.user && state.user.currentUser && state.user.currentUser.isAdmin)
+  
+  console.log(admin)
   return (
     <Router>
       <Switch>

@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/apiCalls";
 import { createBrowserHistory } from "history";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -57,12 +58,12 @@ const Button = styled.button`
   }
 `;
 
-const Link = styled.a`
-  margin: 5px 0px;
-  font-size: 12px;
-  text-decoration: underline;
-  cursor: pointer;
-`;
+// const Link = styled.a`
+//   margin: 5px 0px;
+//   font-size: 12px;
+//   text-decoration: underline;
+//   cursor: pointer;
+// `;
 
 const Error = styled.span`
   color: red;
@@ -72,12 +73,12 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const history = createBrowserHistory({ forceRefresh: true });
   const { isFetching, error } = useSelector((state) => state.user);
+  const history = createBrowserHistory({ forceRefresh: true });
 
   const handleClick = (e) => {
-    e.preventDefault();
     login(dispatch, { username, password });
+    e.preventDefault();
     history.push("/");
     window.location.reload();
   };
@@ -99,7 +100,6 @@ const Login = () => {
             required
           />
           <Button onClick={handleClick}>LOGIN</Button>
-    
         </Form>
       </Wrapper>
     </Container>
