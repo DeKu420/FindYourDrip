@@ -67,6 +67,7 @@ export default function Product() {
         <div className="productTopLeft">
           <Chart data={pStats} dataKey="Sales" title="Sales Performance" />
         </div>
+
         <div className="productTopRight">
           <div className="productInfoTop">
             <img src={product.img} alt="" className="productInfoImg" />
@@ -87,6 +88,7 @@ export default function Product() {
             </div>
           </div>
         </div>
+        
       </div>
       <div className="productBottom">
         <form className="productForm">
